@@ -25,10 +25,28 @@ export const login = (email, password) =>
       .catch((err) => reject(err));
   });
 
-export const getMessage = (token, channelId) =>
+export const getUserInfo = (token, userId = "@me") =>
+  new Promise((resolve, reject) => {
+    fetch(`https://discord.com/api/v9/users/${userId}`, {
+      headers: {
+        Host: "discord.com",
+        "user-agent": "Discord-Android/117014",
+        authorization: token,
+        "x-discord-locale": "en-US",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8",
+        "accept-encoding": "gzip",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+
+export const getMessages = (token, channelId, limit = 50) =>
   new Promise((resolve, reject) => {
     fetch(
-      `https://discord.com/api/v9/channels/${channelId}/messages?limit=10`,
+      `https://discord.com/api/v9/channels/${channelId}/messages?limit=${limit}`,
       {
         headers: {
           Host: "discord.com",
@@ -76,8 +94,32 @@ export const sendMessage = (token, channelId, message) =>
       .catch((err) => reject(err));
   });
 
-export const delay = (second) =>
+export const deleteMessage = (token, channelId, messageId) =>
   new Promise((resolve, reject) => {
+    fetch(
+      `https://discord.com/api/v9/channels/${channelId}/messages/${messageId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Host: "discord.com",
+          "user-agent": "Discord-Android/117014",
+          authorization: token,
+          "x-discord-locale": "en-US",
+          "accept-language": "en-US",
+          "content-type": "application/json; charset=UTF-8",
+          "accept-encoding": "gzip",
+        },
+      }
+    )
+      .then((res) => {
+        console.log(`[${moment().format("hh:mm:ss")}] Deleting message..}`);
+        resolve();
+      })
+      .catch((err) => reject(err));
+  });
+
+export const delay = (second) =>
+  new Promise((resolve, _) => {
     setTimeout(() => {
       console.log(`[${moment().format("hh:mm:ss")}] Delay ${second} second...`);
       resolve();
