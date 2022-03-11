@@ -25,18 +25,11 @@ export const login = (email, password) =>
       .catch((err) => reject(err));
   });
 
-export const sendMessage = (token, index, message) =>
+export const getMessage = (token, channelId) =>
   new Promise((resolve, reject) => {
-    const channelList = [
-      "773713646824062998",
-      "816710076600549416",
-      "816714360545214536",
-    ];
-
     fetch(
-      `https://discord.com/api/v9/channels/${channelList[index]}/messages`,
+      `https://discord.com/api/v9/channels/${channelId}/messages?limit=10`,
       {
-        method: "POST",
         headers: {
           Host: "discord.com",
           "user-agent": "Discord-Android/117014",
@@ -46,16 +39,35 @@ export const sendMessage = (token, index, message) =>
           "content-type": "application/json; charset=UTF-8",
           "accept-encoding": "gzip",
         },
-        body: JSON.stringify({
-          content: message,
-          sticker_ids: [],
-        }),
       }
     )
       .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+
+export const sendMessage = (token, channelId, message) =>
+  new Promise((resolve, reject) => {
+    fetch(`https://discord.com/api/v9/channels/${channelId}/messages`, {
+      method: "POST",
+      headers: {
+        Host: "discord.com",
+        "user-agent": "Discord-Android/117014",
+        authorization: token,
+        "x-discord-locale": "en-US",
+        "accept-language": "en-US",
+        "content-type": "application/json; charset=UTF-8",
+        "accept-encoding": "gzip",
+      },
+      body: JSON.stringify({
+        content: message,
+        sticker_ids: [],
+      }),
+    })
+      .then((res) => res.json())
       .then((res) => {
         console.log(
-          `[${moment().format("hh:mm:ss")}] [work-${index + 1}] [${
+          `[${moment().format("hh:mm:ss")}] [${
             res.author.username
           }] send Message : ${res.content}`
         );

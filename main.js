@@ -1,22 +1,20 @@
-import {
-  randomChannelIndex,
-  sendMessage,
-  delay,
-  login,
-} from "./bin/discord.js";
+import { randomChannelIndex, sendMessage, delay } from "./bin/discord.js";
 import moment from "moment";
 
 (async () => {
-  const email = process.env.EMAIL;
-  const password = process.env.PASSWORD;
+  const token = process.env.TOKEN;
 
-  const { token } = await login(email, password);
+  const channelList = [
+    "773713646824062998",
+    "816710076600549416",
+    "816714360545214536",
+  ];
 
   setInterval(async () => {
     const index = await randomChannelIndex();
-    await sendMessage(token, index, "un.work");
+    await sendMessage(token, channelList[index], "un.work");
     await delay(1);
-    await sendMessage(token, index, "un.dep all");
+    await sendMessage(token, channelList[index], "un.dep all");
     console.log(`[${moment().format("hh:mm:ss")}] Sleep...`);
   }, 45 * 1000);
 })();
