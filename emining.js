@@ -8,5 +8,5 @@ import moment from "moment";
   setInterval(async () => {
     await sendMessage(token, channelId, "emine");
     console.log(`[${moment().format("hh:mm:ss")}] Sleep...`);
-  }, 15 * 1000);
+  }, 16 * 1000);
 })();
