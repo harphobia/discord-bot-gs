@@ -78,6 +78,7 @@ export const sendMessage = (token, channelId, message) =>
       },
       body: JSON.stringify({
         content: `${message}`,
+        sticker_ids: [],
       }),
     })
       .then((res) => res.json())
@@ -88,8 +89,9 @@ export const sendMessage = (token, channelId, message) =>
               res.author.username
             }] send Message : ${res.content}`
           );
+        } else {
+          console.log(`[${moment().format("hh:mm:ss")}] Failed send messages`);
         }
-        console.log(`[${moment().format("hh:mm:ss")}] Failed send messages`);
         resolve(res);
       })
       .catch((err) => reject(err));
