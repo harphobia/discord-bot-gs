@@ -45,7 +45,7 @@ import moment from "moment";
 
   setInterval(async () => {
     const index = await randomChannelIndex(0, owoChannelList.length);
-    await sendMessage(token, owoChannelLis[index], "owo daily");
+    await sendMessage(token, owoChannelList[index], "owo daily");
     console.log(`[${moment().format("hh:mm:ss")}] Sleep 6 hours...`);
   }, 6 * 60 * 60 * 1000);
 })();
