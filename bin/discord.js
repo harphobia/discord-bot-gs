@@ -8,7 +8,6 @@ export const login = (email, password) =>
       headers: {
         Host: "discord.com",
         "user-agent": "Discord-Android/117014",
-        "x-fingerprint": "951067920606330901.Sy0VwEda0fhJzqkrhKXVqwA5PfA",
         "x-discord-locale": "en-US",
         "accept-language": "en-US",
         "content-type": "application/json; charset=UTF-8",
@@ -78,18 +77,20 @@ export const sendMessage = (token, channelId, message) =>
         "accept-encoding": "gzip",
       },
       body: JSON.stringify({
-        content: message,
-        sticker_ids: [],
+        content: `${message}`,
       }),
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(
-          `[${moment().format("hh:mm:ss")}] [${
-            res.author.username ?? "null"
-          }] send Message : ${res.content ?? "null"}`
-        );
-        resolve();
+        if (!res.errors) {
+          console.log(
+            `[${moment().format("hh:mm:ss")}] [${
+              res.author.username
+            }] send Message : ${res.content}`
+          );
+        }
+        console.log(`[${moment().format("hh:mm:ss")}] Failed send messages`);
+        resolve(res);
       })
       .catch((err) => reject(err));
   });
