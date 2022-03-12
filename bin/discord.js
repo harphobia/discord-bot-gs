@@ -86,8 +86,8 @@ export const sendMessage = (token, channelId, message) =>
       .then((res) => {
         console.log(
           `[${moment().format("hh:mm:ss")}] [${
-            res.author.username
-          }] send Message : ${res.content}`
+            res.author.username ?? "null"
+          }] send Message : ${res.content ?? "null"}`
         );
         resolve();
       })
