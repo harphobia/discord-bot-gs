@@ -5,8 +5,8 @@ import {
   delay,
 } from "./bin/discord.js";
 
-const tokens = [];
-const channelId = "946305403539582976";
+const token = process.env.TOKEN;
+const channelId = process.env.CHANNELID;
 
 (async () => {
   while (true) {

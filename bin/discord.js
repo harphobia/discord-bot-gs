@@ -121,11 +121,10 @@ export const deleteMessage = (token, channelId, messageId) =>
 export const delay = (second) =>
   new Promise((resolve, _) => {
     setTimeout(() => {
-      console.log(`[${moment().format("hh:mm:ss")}] Delay ${second} second...`);
       resolve();
     }, second * 1000);
   });
 
-export function randomChannelIndex() {
-  return Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+export function randomChannelIndex(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
