@@ -37,9 +37,9 @@ import moment from "moment";
 
   setInterval(async () => {
     const index = await randomChannelIndex(0, owoChannelList.length);
-    await sendMessage(token, owoChannelLis[index], "owo hunt");
+    await sendMessage(token, owoChannelList[index], "owo hunt");
     await delay(3);
-    await sendMessage(token, owoChannelLis[index], "owo coinflip 500");
+    await sendMessage(token, owoChannelList[index], "owo coinflip 500");
     console.log(`[${moment().format("hh:mm:ss")}] Sleep 10 seconds...`);
   }, 10 * 1000);
 
