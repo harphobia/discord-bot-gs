@@ -83,7 +83,6 @@ export const sendMessage = (token, channelId, message) =>
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(object);
         if (!res.errors) {
           console.log(
             `[${moment().format("hh:mm:ss")}] [${
