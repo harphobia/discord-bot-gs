@@ -3,6 +3,7 @@ import moment from "moment";
 
 (async () => {
   const token = process.env.TOKEN;
+  const bid = process.env.BID || 100;
 
   const owoChannelList = [
     "775261763163521055",
@@ -28,9 +29,9 @@ import moment from "moment";
     setInterval(async () => {
       await sendMessage(token, owoChannelList[index], "owo");
       await delay(5);
-      await sendMessage(token, owoChannelList[index], "owo coinflip 100");
+      await sendMessage(token, owoChannelList[index], `owo coinflip ${bid}`);
       await delay(5);
-      await sendMessage(token, owoChannelList[index], "owo slot 100");
+      await sendMessage(token, owoChannelList[index], `owo slot ${bid}`);
       console.log(`[${moment().format("hh:mm:ss")}] Sleep 15 minutes...`);
     }, 15 * 60 * 1000);
 
