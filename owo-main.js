@@ -17,8 +17,6 @@ import moment from "moment";
       const index = await randomChannelIndex(0, owoChannelList.length);
       await sendMessage(token, owoChannelList[index], "owo");
       await delay(5);
-      await sendMessage(token, owoChannelList[index], "owo coinflip 500");
-      await delay(5);
       await sendMessage(token, owoChannelList[index], "owo hunt");
       await delay(5);
       await sendMessage(token, owoChannelList[index], "owo pray");
@@ -28,7 +26,18 @@ import moment from "moment";
     }, 5 * 60 * 1000);
 
     setInterval(async () => {
+      await sendMessage(token, owoChannelList[index], "owo");
+      await delay(5);
+      await sendMessage(token, owoChannelList[index], "owo coinflip 100");
+      await delay(5);
+      await sendMessage(token, owoChannelList[index], "owo slot 100");
+      console.log(`[${moment().format("hh:mm:ss")}] Sleep 15 minutes...`);
+    }, 15 * 60 * 1000);
+
+    setInterval(async () => {
       const index = await randomChannelIndex(0, owoChannelList.length);
+      await sendMessage(token, owoChannelList[index], "owo");
+      await delay(5);
       await sendMessage(token, owoChannelList[index], "owo daily");
       console.log(`[${moment().format("hh:mm:ss")}] Sleep 6 hours...`);
     }, 6 * 60 * 60 * 1000);
