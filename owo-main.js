@@ -21,9 +21,9 @@ import moment from "moment";
       await delay(5);
       await sendMessage(token, "952875549561339944", "owo pray");
       await delay(5);
-      await sendMessage(token, owoChannelList[index], "owo slot 1");
+      await sendMessage(token, "952875549561339944", "owo slot 1");
       await delay(5);
-      await sendMessage(token, owoChannelList[index], "owo coinflip 1");
+      await sendMessage(token, "952875549561339944", "owo coinflip 1");
       console.log(`[${moment().format("hh:mm:ss")}] Sleep 5 minutes...`);
     }, 5 * 60 * 1000);
 
