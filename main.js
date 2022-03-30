@@ -14,10 +14,10 @@ import moment from "moment";
     setInterval(async () => {
       const index = await randomChannelIndex(0, workChannelList.length);
       await sendMessage(token, workChannelList[index], "un.work");
-      await delay(3);
+      await delay(5);
       await sendMessage(token, workChannelList[index], "un.dep all");
       console.log(`[${moment().format("hh:mm:ss")}] Sleep 45 seconds...`);
-    }, 45 * 1000);
+    }, 50 * 1000);
   } catch (error) {
     console.log(error);
   }
